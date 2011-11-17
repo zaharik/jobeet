@@ -1586,3 +1586,80 @@ Nov 17 18:15:55 symfony [info] {sfWebDebugLogger} Action "job/show" 22.91 ms (1)
 Nov 17 18:15:55 symfony [info] {sfWebDebugLogger} Database (Doctrine) 0.01 ms (2)
 Nov 17 18:15:55 symfony [info] {sfWebDebugLogger} View "Success" for "job/show" 7.83 ms (1)
 Nov 17 18:15:55 symfony [info] {sfWebResponse} Send content (35850 o)
+Nov 17 18:24:42 symfony [info] {sfPatternRouting} Match route "default" (/:module/:action/*) for /job/show/id/1 with parameters array (  'module' => 'job',  'action' => 'show',  'id' => '1',)
+Nov 17 18:24:42 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Nov 17 18:24:42 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Nov 17 18:24:42 symfony [info] {jobActions} Call "jobActions->executeShow()"
+Nov 17 18:24:42 symfony [info] {Doctrine_Connection_Mysql} exec : SET NAMES 'UTF8' - ()
+Nov 17 18:24:42 symfony [info] {Doctrine_Connection_Statement} execute : SELECT j.id AS j__id, j.category_id AS j__category_id, j.type AS j__type, j.company AS j__company, j.logo AS j__logo, j.url AS j__url, j.position AS j__position, j.location AS j__location, j.description AS j__description, j.how_to_apply AS j__how_to_apply, j.token AS j__token, j.is_public AS j__is_public, j.is_activated AS j__is_activated, j.email AS j__email, j.expires_at AS j__expires_at, j.created_at AS j__created_at, j.updated_at AS j__updated_at FROM jobeet_job j WHERE (j.id = ?) LIMIT 1 - (1)
+Nov 17 18:24:42 symfony [err] {sfError404Exception} This request has been forwarded to a 404 error page by the action "job/show".
+Nov 17 18:24:42 symfony [info] {sfWebResponse} Send status "HTTP/1.1 404 Not Found"
+Nov 17 18:24:42 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Nov 17 18:24:42 symfony [info] {sfWebDebugLogger} Configuration 0.75 ms (8)
+Nov 17 18:24:42 symfony [info] {sfWebDebugLogger} Factories 20.08 ms (1)
+Nov 17 18:24:42 symfony [info] {sfWebDebugLogger} Action "job/show" 50.83 ms (1)
+Nov 17 18:24:42 symfony [info] {sfWebDebugLogger} Database (Doctrine) 0.00 ms (2)
+Nov 17 18:25:55 symfony [info] {sfPatternRouting} Match route "default" (/:module/:action/*) for /job/show/id/1 with parameters array (  'module' => 'job',  'action' => 'show',  'id' => '1',)
+Nov 17 18:25:55 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Nov 17 18:25:55 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Nov 17 18:25:55 symfony [info] {jobActions} Call "jobActions->executeShow()"
+Nov 17 18:25:55 symfony [info] {Doctrine_Connection_Mysql} exec : SET NAMES 'UTF8' - ()
+Nov 17 18:25:55 symfony [info] {Doctrine_Connection_Statement} execute : SELECT j.id AS j__id, j.category_id AS j__category_id, j.type AS j__type, j.company AS j__company, j.logo AS j__logo, j.url AS j__url, j.position AS j__position, j.location AS j__location, j.description AS j__description, j.how_to_apply AS j__how_to_apply, j.token AS j__token, j.is_public AS j__is_public, j.is_activated AS j__is_activated, j.email AS j__email, j.expires_at AS j__expires_at, j.created_at AS j__created_at, j.updated_at AS j__updated_at FROM jobeet_job j WHERE (j.id = ?) LIMIT 1 - (1)
+Nov 17 18:25:55 symfony [info] {sfPHPView} Render "/Users/savenkova/Sites/sfprojects/jobeet/apps/frontend/modules/job/templates/showSuccess.php"
+Nov 17 18:25:55 symfony [info] {main} Set slot "title"
+Nov 17 18:25:55 symfony [info] {sfPHPView} Decorate content with "/Users/savenkova/Sites/sfprojects/jobeet/apps/frontend/templates/layout.php"
+Nov 17 18:25:55 symfony [info] {sfPHPView} Render "/Users/savenkova/Sites/sfprojects/jobeet/apps/frontend/templates/layout.php"
+Nov 17 18:25:55 symfony [info] {main} Get slot "title"
+Nov 17 18:25:55 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Nov 17 18:25:55 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Nov 17 18:25:55 symfony [info] {sfWebDebugLogger} Configuration 0.90 ms (9)
+Nov 17 18:25:55 symfony [info] {sfWebDebugLogger} Factories 17.05 ms (1)
+Nov 17 18:25:55 symfony [info] {sfWebDebugLogger} Action "job/show" 22.17 ms (1)
+Nov 17 18:25:55 symfony [info] {sfWebDebugLogger} Database (Doctrine) 0.00 ms (2)
+Nov 17 18:25:55 symfony [info] {sfWebDebugLogger} View "Success" for "job/show" 8.49 ms (1)
+Nov 17 18:25:55 symfony [info] {sfWebResponse} Send content (35681 o)
+Nov 17 18:26:11 symfony [info] {sfPatternRouting} Match route "default" (/:module/:action/*) for /job/show/id/1 with parameters array (  'module' => 'job',  'action' => 'show',  'id' => '1',)
+Nov 17 18:26:11 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Nov 17 18:26:11 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Nov 17 18:26:11 symfony [info] {jobActions} Call "jobActions->executeShow()"
+Nov 17 18:26:11 symfony [info] {Doctrine_Connection_Mysql} exec : SET NAMES 'UTF8' - ()
+Nov 17 18:26:11 symfony [info] {Doctrine_Connection_Statement} execute : SELECT j.id AS j__id, j.category_id AS j__category_id, j.type AS j__type, j.company AS j__company, j.logo AS j__logo, j.url AS j__url, j.position AS j__position, j.location AS j__location, j.description AS j__description, j.how_to_apply AS j__how_to_apply, j.token AS j__token, j.is_public AS j__is_public, j.is_activated AS j__is_activated, j.email AS j__email, j.expires_at AS j__expires_at, j.created_at AS j__created_at, j.updated_at AS j__updated_at FROM jobeet_job j WHERE (j.id = ?) LIMIT 1 - (1)
+Nov 17 18:26:11 symfony [err] {sfError404Exception} This request has been forwarded to a 404 error page by the action "job/show".
+Nov 17 18:26:11 symfony [info] {sfWebResponse} Send status "HTTP/1.1 404 Not Found"
+Nov 17 18:26:11 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Nov 17 18:26:11 symfony [info] {sfWebDebugLogger} Configuration 0.73 ms (8)
+Nov 17 18:26:11 symfony [info] {sfWebDebugLogger} Factories 17.31 ms (1)
+Nov 17 18:26:11 symfony [info] {sfWebDebugLogger} Action "job/show" 35.59 ms (1)
+Nov 17 18:26:11 symfony [info] {sfWebDebugLogger} Database (Doctrine) 0.00 ms (2)
+Nov 17 18:26:56 symfony [info] {sfPatternRouting} Match route "default" (/:module/:action/*) for /job/show/id/1 with parameters array (  'module' => 'job',  'action' => 'show',  'id' => '1',)
+Nov 17 18:26:56 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Nov 17 18:26:56 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Nov 17 18:26:56 symfony [info] {jobActions} Call "jobActions->executeShow()"
+Nov 17 18:26:56 symfony [info] {Doctrine_Connection_Mysql} exec : SET NAMES 'UTF8' - ()
+Nov 17 18:26:56 symfony [info] {Doctrine_Connection_Statement} execute : SELECT j.id AS j__id, j.category_id AS j__category_id, j.type AS j__type, j.company AS j__company, j.logo AS j__logo, j.url AS j__url, j.position AS j__position, j.location AS j__location, j.description AS j__description, j.how_to_apply AS j__how_to_apply, j.token AS j__token, j.is_public AS j__is_public, j.is_activated AS j__is_activated, j.email AS j__email, j.expires_at AS j__expires_at, j.created_at AS j__created_at, j.updated_at AS j__updated_at FROM jobeet_job j WHERE (j.id = ?) LIMIT 1 - (1)
+Nov 17 18:26:56 symfony [info] {sfPHPView} Render "/Users/savenkova/Sites/sfprojects/jobeet/apps/frontend/modules/job/templates/showSuccess.php"
+Nov 17 18:26:56 symfony [info] {main} Set slot "title"
+Nov 17 18:26:56 symfony [info] {sfPHPView} Decorate content with "/Users/savenkova/Sites/sfprojects/jobeet/apps/frontend/templates/layout.php"
+Nov 17 18:26:56 symfony [info] {sfPHPView} Render "/Users/savenkova/Sites/sfprojects/jobeet/apps/frontend/templates/layout.php"
+Nov 17 18:26:56 symfony [info] {main} Get slot "title"
+Nov 17 18:26:56 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Nov 17 18:26:56 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Nov 17 18:26:56 symfony [info] {sfWebDebugLogger} Configuration 0.79 ms (9)
+Nov 17 18:26:56 symfony [info] {sfWebDebugLogger} Factories 17.83 ms (1)
+Nov 17 18:26:56 symfony [info] {sfWebDebugLogger} Action "job/show" 22.48 ms (1)
+Nov 17 18:26:56 symfony [info] {sfWebDebugLogger} Database (Doctrine) 0.00 ms (2)
+Nov 17 18:26:56 symfony [info] {sfWebDebugLogger} View "Success" for "job/show" 7.90 ms (1)
+Nov 17 18:26:56 symfony [info] {sfWebResponse} Send content (35681 o)
+Nov 17 18:26:59 symfony [info] {sfPatternRouting} Match route "default" (/:module/:action/*) for /job/show/id/3 with parameters array (  'module' => 'job',  'action' => 'show',  'id' => '3',)
+Nov 17 18:26:59 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Nov 17 18:26:59 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Nov 17 18:26:59 symfony [info] {jobActions} Call "jobActions->executeShow()"
+Nov 17 18:26:59 symfony [info] {Doctrine_Connection_Mysql} exec : SET NAMES 'UTF8' - ()
+Nov 17 18:26:59 symfony [info] {Doctrine_Connection_Statement} execute : SELECT j.id AS j__id, j.category_id AS j__category_id, j.type AS j__type, j.company AS j__company, j.logo AS j__logo, j.url AS j__url, j.position AS j__position, j.location AS j__location, j.description AS j__description, j.how_to_apply AS j__how_to_apply, j.token AS j__token, j.is_public AS j__is_public, j.is_activated AS j__is_activated, j.email AS j__email, j.expires_at AS j__expires_at, j.created_at AS j__created_at, j.updated_at AS j__updated_at FROM jobeet_job j WHERE (j.id = ?) LIMIT 1 - (3)
+Nov 17 18:26:59 symfony [err] {sfError404Exception} This request has been forwarded to a 404 error page by the action "job/show".
+Nov 17 18:26:59 symfony [info] {sfWebResponse} Send status "HTTP/1.1 404 Not Found"
+Nov 17 18:26:59 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Nov 17 18:26:59 symfony [info] {sfWebDebugLogger} Configuration 0.77 ms (8)
+Nov 17 18:26:59 symfony [info] {sfWebDebugLogger} Factories 16.61 ms (1)
+Nov 17 18:26:59 symfony [info] {sfWebDebugLogger} Action "job/show" 33.85 ms (1)
+Nov 17 18:26:59 symfony [info] {sfWebDebugLogger} Database (Doctrine) 0.00 ms (2)
