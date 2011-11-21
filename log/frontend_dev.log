@@ -6685,3 +6685,22 @@ Nov 21 12:01:28 symfony [info] {sfWebDebugLogger} Action "job/show" 23.20 ms (1)
 Nov 21 12:01:28 symfony [info] {sfWebDebugLogger} Database (Doctrine) 0.00 ms (2)
 Nov 21 12:01:28 symfony [info] {sfWebDebugLogger} View "Success" for "job/show" 8.29 ms (1)
 Nov 21 12:01:28 symfony [info] {sfWebResponse} Send content (36394 o)
+Nov 21 12:01:59 symfony [info] {sfPatternRouting} Match route "job_show_user" (/job/:company_slug/:location_slug/:id/:position_slug) for /job/extreme-sensio/paris-france/49/web-designer with parameters array (  'module' => 'job',  'action' => 'show',  'company_slug' => 'extreme-sensio',  'location_slug' => 'paris-france',  'id' => '49',  'position_slug' => 'web-designer',)
+Nov 21 12:01:59 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Nov 21 12:01:59 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Nov 21 12:01:59 symfony [info] {jobActions} Call "jobActions->executeShow()"
+Nov 21 12:01:59 symfony [info] {Doctrine_Connection_Mysql} exec : SET NAMES 'UTF8' - ()
+Nov 21 12:01:59 symfony [info] {Doctrine_Connection_Statement} execute : SELECT j.id AS j__id, j.category_id AS j__category_id, j.type AS j__type, j.company AS j__company, j.logo AS j__logo, j.url AS j__url, j.position AS j__position, j.location AS j__location, j.description AS j__description, j.how_to_apply AS j__how_to_apply, j.token AS j__token, j.is_public AS j__is_public, j.is_activated AS j__is_activated, j.email AS j__email, j.expires_at AS j__expires_at, j.created_at AS j__created_at, j.updated_at AS j__updated_at FROM jobeet_job j WHERE (j.id = ? AND j.expires_at > ?) - (49, 2011-11-21 12:01:59)
+Nov 21 12:01:59 symfony [info] {sfPHPView} Render "/Users/savenkova/Sites/sfprojects/jobeet/apps/frontend/modules/job/templates/showSuccess.php"
+Nov 21 12:01:59 symfony [info] {main} Set slot "title"
+Nov 21 12:01:59 symfony [info] {sfPHPView} Decorate content with "/Users/savenkova/Sites/sfprojects/jobeet/apps/frontend/templates/layout.php"
+Nov 21 12:01:59 symfony [info] {sfPHPView} Render "/Users/savenkova/Sites/sfprojects/jobeet/apps/frontend/templates/layout.php"
+Nov 21 12:01:59 symfony [info] {main} Get slot "title"
+Nov 21 12:01:59 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Nov 21 12:01:59 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Nov 21 12:01:59 symfony [info] {sfWebDebugLogger} Configuration 0.76 ms (9)
+Nov 21 12:01:59 symfony [info] {sfWebDebugLogger} Factories 19.97 ms (1)
+Nov 21 12:01:59 symfony [info] {sfWebDebugLogger} Action "job/show" 25.42 ms (1)
+Nov 21 12:01:59 symfony [info] {sfWebDebugLogger} Database (Doctrine) 0.00 ms (2)
+Nov 21 12:01:59 symfony [info] {sfWebDebugLogger} View "Success" for "job/show" 8.36 ms (1)
+Nov 21 12:01:59 symfony [info] {sfWebResponse} Send content (36394 o)
