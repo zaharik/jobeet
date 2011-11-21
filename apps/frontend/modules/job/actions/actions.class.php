@@ -16,6 +16,7 @@ class jobActions extends sfActions
     //$this->jobeet_jobs = Doctrine_Core::getTable('JobeetJob')->getActiveJobs();
   }
 
+  
   public function executeShow(sfWebRequest $request)
   {
     $this->job = $this->getRoute()->getObject();
