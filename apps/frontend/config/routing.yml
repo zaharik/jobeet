@@ -2,8 +2,15 @@
 # http://www.symfony-project.org/reference/1_4/en/10-Routing
 
 job:
-  class: sfDoctrineRouteCollection
-  options: { model: JobeetJob }
+  class:   sfDoctrineRouteCollection
+  options:
+    model:  JobeetJob
+    column: token
+    object_actions:
+      publish: PUT
+      extend:  PUT
+  requirements:
+    token: \w+
 
 category:
   url:    /category/:slug
