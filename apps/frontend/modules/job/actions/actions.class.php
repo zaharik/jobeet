@@ -8,6 +8,11 @@
  * @author     Your name here
  * @version    SVN: $Id: actions.class.php 23810 2009-11-12 11:07:44Z Kris.Wallsmith $
  */
+
+
+
+
+
 class jobActions extends sfActions
 {
   public function executeIndex(sfWebRequest $request)
@@ -15,7 +20,7 @@ class jobActions extends sfActions
     $this->categories = Doctrine_Core::getTable('JobeetCategory')->getWithJobs();
     //$this->jobeet_jobs = Doctrine_Core::getTable('JobeetJob')->getActiveJobs();
   }
-
+  
   public function executeShow(sfWebRequest $request)
   {
     $this->job = $this->getRoute()->getObject();
