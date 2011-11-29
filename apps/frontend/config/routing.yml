@@ -13,12 +13,12 @@ job:
     token: \w+
 
 category:
-  url:    /category/:slug
+  url:     /category/:slug.:sf_format
   class:   sfDoctrineRoute
-  options:
-    model: JobeetCategory
-    type:  object
-  param:   { module: category, action: show }
+  param:   { module: category, action: show, sf_format: html }
+  options: { model: JobeetCategory, type: object }
+  requirements:
+    sf_format: (?:html|atom)
 
 job_show_user:
   url:     /job/:company_slug/:location_slug/:id/:position_slug
