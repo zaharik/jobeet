@@ -9,6 +9,8 @@
     </title>
     <link rel="shortcut icon" href="/favicon.ico" />
     <link rel="alternate" type="application/atom+xml" title="Latest Jobs" href="<?php echo url_for('job', array('sf_format' => 'atom'), true) ?>" />
+    <?php use_javascript('jquery-1.7.1.js') ?>
+    <?php use_javascript('search.js') ?>
     <?php include_javascripts() ?>
     <?php include_stylesheets() ?>
   </head>
@@ -30,9 +32,10 @@
  
             <div class="search">
               <h2>Ask for a job</h2>
-              <form action="" method="get">
-                <input type="text" name="keywords" id="search_keywords" />
+              <form action="<?php echo url_for('job_search') ?>" method="get">
+                <input type="text" name="query" value="<?php echo $sf_request->getParameter('query') ?>" id="search_keywords" />
                 <input type="submit" value="search" />
+                <img id="loader" src="/images/loader.gif" style="vertical-align: middle; display: none" />
                 <div class="help">
                   Enter some keywords (city, country, position, ...)
                 </div>
@@ -75,11 +78,20 @@
             <img src="/images/symfony.gif" alt="symfony framework" /></a>
           </span>
           <ul>
-            <li><a href="">About Jobeet</a></li>
-            <li class="feed"><a href="<?php echo url_for('job', array('sf_format' => 'atom')) ?>">Full feed</a></li>
-            <li><a href="">Jobeet API</a></li>
-            <li class="last"><a href="">Affiliates</a></li>
+            <li>
+              <a href=""><?php echo __('About Jobeet') ?></a>
+            </li>
+            <li class="feed">
+              <?php echo link_to(__('Full feed'), 'job', array('sf_format' => 'atom')) ?>
+            </li>
+            <li>
+              <a href=""><?php echo __('Jobeet API') ?></a>
+            </li>
+            <li class="last">
+              <?php echo link_to(__('Become an affiliate'), 'affiliate_new') ?>
+            </li>
           </ul>
+          <?php include_component('language', 'language') ?>
         </div>
       </div>
     </div>

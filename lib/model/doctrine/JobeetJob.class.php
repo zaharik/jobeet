@@ -13,16 +13,33 @@
 class JobeetJob extends BaseJobeetJob
 {
   public function save(Doctrine_Connection $conn = NULL){
-      if ($this->isNew() && !$this->getExpiresAt()){
-          $now = $this->getCreatedAt() ? $this->getDateTimeObject('created_at')->format('U') : time();
-          $this->setExpiresAt(date('Y-m-d H:i:s', $now + 86400 * sfConfig::get('app_active_days')));
+    if ($this->isNew() && !$this->getExpiresAt()){
+        $now = $this->getCreatedAt() ? $this->getDateTimeObject('created_at')->format('U') : time();
+        $this->setExpiresAt(date('Y-m-d H:i:s', $now + 86400 * sfConfig::get('app_active_days')));
 
-          if (!$this->getToken())
-          {
-            $this->setToken(sha1($this->getEmail().rand(11111, 99999)));
-          }
-      }
-      return parent::save($conn);
+        if (!$this->getToken())
+        {
+          $this->setToken(sha1($this->getEmail().rand(11111, 99999)));
+        }
+    }
+    
+    $conn = $conn ? $conn : Doctrine_Core::getTable('JobeetJob')->getConnection();
+    $conn->beginTransaction();
+    try
+    {
+      $ret = parent::save($conn);
+
+      $this->updateLuceneIndex();
+
+      $conn->commit();
+
+      return $ret;
+    }
+    catch (Exception $e)
+    {
+      $conn->rollBack();
+      throw $e;
+    }
   }
 
   public function __toString() {
@@ -79,5 +96,65 @@ class JobeetJob extends BaseJobeetJob
     $this->save();
  
     return true;
+  }
+  
+  public function asArray($host)
+  {
+    return array(
+      'category'     => $this->getJobeetCategory()->getName(),
+      'type'         => $this->getType(),
+      'company'      => $this->getCompany(),
+      'logo'         => $this->getLogo() ? 'http://'.$host.'/uploads/jobs/'.$this->getLogo() : null,
+      'url'          => $this->getUrl(),
+      'position'     => $this->getPosition(),
+      'location'     => $this->getLocation(),
+      'description'  => $this->getDescription(),
+      'how_to_apply' => $this->getHowToApply(),
+      'expires_at'   => $this->getCreatedAt(),
+    );
+  }
+  
+  public function updateLuceneIndex()
+  {
+    $index = JobeetJobTable::getLuceneIndex();
+
+    // удалить существующие записи
+    foreach ($index->find('pk:'.$this->getId()) as $hit)
+    {
+      $index->delete($hit->id);
+    }
+
+    // не индексировать истекшие и не активированные вакансии
+    if ($this->isExpired() || !$this->getIsActivated())
+    {
+      return;
+    }
+
+    $doc = new Zend_Search_Lucene_Document();
+
+    // сохраняем первичный ключ вакансии для идентификации ее в результатах поиска
+    $doc->addField(Zend_Search_Lucene_Field::Keyword('pk', $this->getId()));
+
+    // индексируем поля вакансии
+    $doc->addField(Zend_Search_Lucene_Field::UnStored('position', $this->getPosition(), 'utf-8'));
+    $doc->addField(Zend_Search_Lucene_Field::UnStored('company', $this->getCompany(), 'utf-8'));
+    $doc->addField(Zend_Search_Lucene_Field::UnStored('location', $this->getLocation(), 'utf-8'));
+    $doc->addField(Zend_Search_Lucene_Field::UnStored('description', $this->getDescription(), 'utf-8'));
+
+    // добавляем работу в индекс
+    $index->addDocument($doc);
+    $index->commit();
+  }
+  
+  public function delete(Doctrine_Connection $conn = null)
+  {
+    $index = JobeetJobTable::getLuceneIndex();
+
+    foreach ($index->find('pk:'.$this->getId()) as $hit)
+    {
+      $index->delete($hit->id);
+    }
+
+    return parent::delete($conn);
   }
 }

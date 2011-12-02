@@ -6,7 +6,7 @@ $browser = new JobeetTestFunctional(new sfBrowser());
 $browser->loadData();
  
 $browser->info('1 - The homepage')->
-  get('/')->
+  get('/ru/')->
   with('request')->begin()->
     isParameter('module', 'job')->
     isParameter('action', 'index')->
@@ -26,7 +26,7 @@ $browser->info('1 - The homepage')->
 ;
  
 $browser->info('1 - The homepage')->
-  get('/')->
+  get('/ru/')->
   info('  1.3 - A category has a link to the category page only if too many jobs')->
   with('response')->begin()->
     checkElement('.category_design .more_jobs', false)->
@@ -44,7 +44,7 @@ $browser->info('1 - The homepage')->
 $job = $browser->getMostRecentProgrammingJob();
  
 $browser->info('2 - The job page')->
-  get('/')->
+  get('/ru/')->
  
   info('  2.1 - Each job on the homepage is clickable and give detailed information')->
   click('Web Developer', array(), array('position' => 1))->
@@ -58,18 +58,18 @@ $browser->info('2 - The job page')->
   end()->
  
   info('  2.2 - A non-existent job forwards the user to a 404')->
-  get('/job/foo-inc/milano-italy/0/painter')->
+  get('/ru/job/foo-inc/milano-italy/0/painter')->
   with('response')->isStatusCode(404)->
  
   info('  2.3 - An expired job page forwards the user to a 404')->
-  get(sprintf('/job/sensio-labs/paris-france/%d/web-developer', $browser->getExpiredJob()->getId()))->
+  get(sprintf('/ru/job/sensio-labs/paris-france/%d/web-developer', $browser->getExpiredJob()->getId()))->
   with('response')->isStatusCode(404)
 ;
 
 $browser->info('3 - Post a Job page')->
   info('  3.1 - Submit a Job')->
  
-  get('/job/new')->
+  get('/ru/job/new')->
   with('request')->begin()->
     isParameter('module', 'job')->
     isParameter('action', 'new')->
@@ -120,7 +120,7 @@ $browser->
 $browser->
   info('  3.2 - Submit a Job with invalid values')->
  
-  get('/job/new')->
+  get('/ru/job/new')->
   click('Preview your job', array('job' => array(
     'company'      => 'Sensio Labs',
     'position'     => 'Developer',
@@ -162,7 +162,7 @@ $browser->info('  3.4 - On the preview page, you can delete the job')->
 
 $browser->info('  3.5 - When a job is published, it cannot be edited anymore')->
   createJob(array('position' => 'FOO3'), true)->
-  get(sprintf('/job/%s/edit', $browser->getJobByPosition('FOO3')->getToken()))->
+  get(sprintf('/ru/job/%s/edit', $browser->getJobByPosition('FOO3')->getToken()))->
  
   with('response')->begin()->
     //isStatusCode(404)->
@@ -171,7 +171,7 @@ $browser->info('  3.5 - When a job is published, it cannot be edited anymore')->
 
 $browser->info('  3.6 - A job validity cannot be extended before the job expires soon')->
   createJob(array('position' => 'FOO4'), true)->
-  call(sprintf('/job/%s/extend', $browser->getJobByPosition('FOO4')->getToken()), 'put', array('_with_csrf' => true))->
+  call(sprintf('/ru/job/%s/extend', $browser->getJobByPosition('FOO4')->getToken()), 'put', array('_with_csrf' => true))->
   with('response')->begin()->
     isStatusCode(404)->
   end()
@@ -186,7 +186,7 @@ $job->setExpiresAt(date('Y-m-d'));
 $job->save();
  
 $browser->
-  call(sprintf('/job/%s/extend', $job->getToken()), 'put', array('_with_csrf' => true))->
+  call(sprintf('/ru/job/%s/extend', $job->getToken()), 'put', array('_with_csrf' => true))->
   with('response')->isRedirected()
 ;
  
@@ -203,18 +203,54 @@ $browser->
   restart()->
 
   info('  4.1 - When the user access a job, it is added to its history')->
-  get('/')->
+  get('/ru/')->
   click('Web Developer', array(), array('position' => 1))->
-  get('/')->
+  get('/ru/')->
   with('user')->begin()->
     isAttribute('job_history', array($browser->getMostRecentProgrammingJob()->getId()))->
   end()->
  
   info('  4.2 - A job is not added twice in the history')->
   click('Web Developer', array(), array('position' => 1))->
-  get('/')->
+  get('/ru/')->
   with('user')->begin()->
     isAttribute('job_history', array($browser->getMostRecentProgrammingJob()->getId()))->
   end()
 ;
   
+$browser->setHttpHeader('X_REQUESTED_WITH', 'XMLHttpRequest');
+$browser->
+  info('5 - Live search')->
+ 
+  get('/ru/search?query=sens*')->
+  with('response')->begin()->
+    checkElement('table tr', 2)->
+  end()
+;
+
+$browser->setHttpHeader('ACCEPT_LANGUAGE', 'ru_UA,ru,en;q=0.7');
+$browser->
+  info('6 - User culture')->
+ 
+  restart()->
+ 
+  info('  6.1 - For the first request, symfony guesses the best culture')->
+  get('/ru/')->
+  //isRedirected()->
+  followRedirect()->
+  with('user')->isCulture('ru')->
+ 
+  info('  6.2 - Available cultures are en and ru')->
+  get('/it/')->
+  with('response')->isStatusCode(404)
+;
+ 
+$browser->setHttpHeader('ACCEPT_LANGUAGE', 'en,ru;q=0.7');
+$browser->
+  info('  6.3 - The culture guessing is only for the first request')->
+ 
+  get('/ru/')->
+  //isRedirected()->
+  followRedirect()->
+  with('user')->isCulture('en')
+;

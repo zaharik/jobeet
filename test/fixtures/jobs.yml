@@ -4,6 +4,7 @@ JobeetJob:
   job_<?php echo $i ?>:
     JobeetCategory: programming
     company:        Company <?php echo $i."\n" ?>
+    logo:           job_<?php echo $i ?>.png
     position:       Web Developer
     location:       Paris, France
     description:    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
@@ -12,14 +13,14 @@ JobeetJob:
     is_activated:   true
     #created_at:     '2011-12-01 00:00:00'
     token:          job_<?php echo $i."\n" ?>
-    email:          job@example.com
+    email:          job_<?php echo $i ?>@example.com
 <?php endfor ?>
   
   job_sensio_labs:
     JobeetCategory: programming
     type:         full-time
     company:      Sensio Labs
-    logo:         /uploads/jobs/sensio_labs.png
+    logo:         sensio_labs.png
     url:          http://www.sensiolabs.com/
     position:     Web Developer
     location:     Paris, France
@@ -35,13 +36,13 @@ JobeetJob:
     is_activated: true
     token:        job_sensio_labs
     email:        job@example.com
-    expires_at:   '2011-10-10'
+    #expires_at:   '2011-08-10'
  
   job_extreme_sensio:
     JobeetCategory:  design
     type:         part-time
     company:      Extreme Sensio
-    logo:         /uploads/jobs/extreme_sensio.png
+    logo:         extreme_sensio.png
     url:          http://www.extreme-sensio.com/
     position:     Web Designer
     location:     Paris, France
@@ -61,7 +62,7 @@ JobeetJob:
     is_activated: true
     token:        job_extreme_sensio
     email:        job@example.com
-    expires_at:   '2011-11-30'
+    #expires_at:   '2011-11-26'
 
   expired_job:
     JobeetCategory: programming
@@ -71,7 +72,7 @@ JobeetJob:
     description:    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
     how_to_apply:   Send your resume to lorem.ipsum [at] dolor.sit
     is_public:      true
-    is_activated:   true
-    created_at:     '2011-12-01 00:00:00'
+    is_activated:   false
+    created_at:     '2011-10-01 00:00:00'
     token:          job_expired
     email:          job@example.com
